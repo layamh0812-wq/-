@@ -1,0 +1,133 @@
+:root{
+  --bg:#0d1117; --bg2:#161b22; --bg3:#1f2630;
+  --fg:#e6edf3; --muted:#8b949e;
+  --accent:#22d3ee; --accent2:#a78bfa; --green:#3fb950; --red:#f85149; --yellow:#d29922;
+  --border:#30363d; --radius:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background:var(--bg);color:var(--fg)}
+#app{display:flex;min-height:100vh}
+
+/* ---------- 侧边栏 ---------- */
+#sidebar{width:250px;background:var(--bg2);border-right:1px solid var(--border);padding:18px 14px;display:flex;flex-direction:column;gap:16px;position:sticky;top:0;height:100vh;overflow-y:auto}
+.logo{display:flex;gap:10px;align-items:center}
+.logo-icon{font-size:30px}
+.logo h1{font-size:19px}
+.logo small{color:var(--muted)}
+#nav{display:flex;flex-direction:column;gap:4px;flex:1}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;cursor:pointer;color:var(--muted);font-size:14px;border:1px solid transparent}
+.nav-item:hover{background:var(--bg3);color:var(--fg)}
+.nav-item.active{background:linear-gradient(90deg,rgba(34,211,238,.15),transparent);color:var(--accent);border-color:rgba(34,211,238,.3)}
+.nav-item .done-dot{margin-left:auto;color:var(--green);font-size:12px}
+.nav-group{margin-top:10px;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;padding:0 12px}
+.sidebar-footer{border-top:1px solid var(--border);padding-top:12px}
+.progress-mini span{font-size:12px;color:var(--muted)}
+.bar{height:6px;background:var(--bg3);border-radius:4px;overflow:hidden;margin:6px 0}
+.bar>div{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;transition:.4s}
+.progress-mini em{font-size:12px;font-style:normal;color:var(--accent)}
+
+/* ---------- 主区域 ---------- */
+#main{flex:1;padding:28px 34px;max-width:1000px}
+.hero{background:linear-gradient(135deg,rgba(34,211,238,.12),rgba(167,139,250,.12));border:1px solid var(--border);border-radius:var(--radius);padding:30px;margin-bottom:24px}
+.hero h2{font-size:26px;margin-bottom:8px}
+.hero p{color:var(--muted);line-height:1.7}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:20px}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;cursor:pointer;transition:.2s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.card h3{font-size:16px;margin-bottom:6px}
+.card p{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:10px}
+.card .meta{font-size:12px;color:var(--accent)}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;border:1px solid var(--border);color:var(--muted);margin-right:6px}
+h2.page-title{font-size:22px;margin-bottom:6px}
+.page-sub{color:var(--muted);font-size:14px;margin-bottom:20px}
+.chapter{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:14px;overflow:hidden}
+.chapter-head{padding:14px 18px;display:flex;align-items:center;gap:12px;cursor:pointer}
+.chapter-head h3{font-size:15px;flex:1}
+.chapter-head .chev{color:var(--muted);transition:.2s}
+.chapter.open .chev{transform:rotate(90deg)}
+.lesson-list{display:none;border-top:1px solid var(--border)}
+.chapter.open .lesson-list{display:block}
+.lesson-item{display:flex;align-items:center;gap:10px;padding:11px 18px;font-size:14px;color:var(--muted);cursor:pointer;border-bottom:1px solid var(--border)}
+.lesson-item:last-child{border-bottom:none}
+.lesson-item:hover{background:var(--bg3);color:var(--fg)}
+.lesson-item .num{width:22px;height:22px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:11px}
+.lesson-item.done .num{background:var(--green);color:#000}
+.lesson-item .dur{margin-left:auto;font-size:12px}
+
+/* ---------- 课程内容 ---------- */
+.lesson-body{padding:20px;overflow-y:auto;max-height:60vh;line-height:1.85;font-size:14.5px}
+.lesson-body h3{margin:18px 0 8px;color:var(--accent)}
+.lesson-body code{background:var(--bg3);padding:2px 6px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;color:#7ee787}
+.lesson-body pre{background:#0a0e14;border:1px solid var(--border);border-radius:8px;padding:14px;overflow-x:auto;margin:10px 0}
+.lesson-body pre code{background:none;padding:0;color:#c9d1d9;white-space:pre}
+.lesson-body .warn{border-left:3px solid var(--yellow);background:rgba(210,153,34,.08);padding:10px 14px;border-radius:6px;margin:12px 0;font-size:13px}
+.lesson-body .tip{border-left:3px solid var(--green);background:rgba(63,185,80,.08);padding:10px 14px;border-radius:6px;margin:12px 0;font-size:13px}
+.lesson-body ul{padding-left:20px;margin:8px 0}
+.lesson-body table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+.lesson-body th,.lesson-body td{border:1px solid var(--border);padding:8px 10px;text-align:left}
+
+/* ---------- 弹层 ---------- */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center;z-index:50;padding:20px}
+.modal.hidden{display:none}
+.modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);width:100%;max-width:780px;max-height:90vh;display:flex;flex-direction:column}
+.modal-box header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border)}
+.modal-box header h2{font-size:17px}
+.modal-box footer{padding:14px 20px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end}
+.icon-btn{background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer}
+.btn{padding:9px 18px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--fg);cursor:pointer;font-size:14px}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);color:#04222a;border-color:var(--accent);font-weight:600}
+.btn.primary:disabled{opacity:.4;cursor:not-allowed}
+
+/* ---------- 测验 / 靶场 / 视频 ---------- */
+.quiz-q{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px}
+.quiz-q h4{margin-bottom:12px;font-size:15px}
+.quiz-opt{display:block;padding:10px 14px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;cursor:pointer;font-size:14px}
+.quiz-opt:hover{border-color:var(--accent)}
+.quiz-opt.correct{border-color:var(--green);background:rgba(63,185,80,.12)}
+.quiz-opt.wrong{border-color:var(--red);background:rgba(248,81,73,.12)}
+.quiz-q h4 .badge{float:right;font-size:12px;padding:2px 10px;border-radius:20px}
+.badge.pass{background:rgba(63,185,80,.15);color:var(--green)}
+.badge.fail{background:rgba(248,81,73,.15);color:var(--red)}
+.badge.wait{background:var(--bg3);color:var(--muted)}
+.score-bar{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:18px;display:flex;align-items:center;gap:18px}
+.score-big{font-size:34px;font-weight:700;color:var(--accent)}
+.video-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:16px}
+.video-card .vhead{padding:14px 18px;display:flex;align-items:center;gap:10px;cursor:pointer}
+.video-card .vhead h4{font-size:15px;flex:1}
+.video-embed{display:none;aspect-ratio:16/9;background:#000}
+.video-card.open .video-embed{display:block}
+.video-embed iframe{width:100%;height:100%;border:none}
+.lab{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:18px}
+.lab h3{margin-bottom:4px;font-size:17px}
+.lab .desc{color:var(--muted);font-size:13.5px;margin-bottom:14px;line-height:1.7}
+.lab input[type=text],.lab input[type=password],.lab textarea,.lab select{width:100%;background:#0a0e14;border:1px solid var(--border);border-radius:8px;color:var(--fg);padding:10px 12px;font-size:14px;margin-bottom:10px;font-family:inherit}
+.lab textarea{font-family:Consolas,monospace;min-height:80px;resize:vertical}
+.lab button{padding:9px 20px;border-radius:8px;border:none;background:var(--accent);color:#04222a;font-weight:600;cursor:pointer;font-size:14px}
+.lab button:hover{filter:brightness(1.1)}
+.lab .out{background:#0a0e14;border:1px solid var(--border);border-radius:8px;padding:12px;font-size:13px;font-family:Consolas,monospace;white-space:pre-wrap;margin-top:12px;max-height:260px;overflow-y:auto;color:#c9d1d9;min-height:20px}
+.strength-meter{height:8px;background:var(--bg3);border-radius:4px;margin:10px 0;overflow:hidden}
+.strength-meter>div{height:100%;width:0;transition:.3s}
+.gauge-row{display:flex;gap:8px;margin:8px 0;flex-wrap:wrap}
+.gauge-row span{font-size:12px;padding:4px 10px;border-radius:20px;border:1px solid var(--border);color:var(--muted)}
+.gauge-row span.on{border-color:var(--green);color:var(--green)}
+.mock-site{background:#fff;color:#222;border-radius:8px;padding:18px;font-size:14px}
+.mock-site input{border:1px solid #ccc!important;color:#222!important;background:#fff!important}
+.injected{outline:2px dashed var(--red);outline-offset:4px}
+.chip-inputs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.legend{font-size:12px;color:var(--muted);margin-top:6px}
+.lesson-video{margin-top:22px;border-top:1px dashed var(--border);padding-top:16px}
+.lesson-video h4{font-size:14px;color:var(--accent);margin-bottom:10px}
+.flag-ok{color:var(--green);font-weight:700}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){#sidebar{display:none}#main{padding:18px}.grid2{grid-template-columns:1fr}}
+.roadmap-step{display:flex;gap:14px;margin-bottom:0}
+.roadmap-line{display:flex;flex-direction:column;align-items:center}
+.roadmap-dot{width:34px;height:34px;border-radius:50%;background:var(--bg3);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.roadmap-dot.done{background:var(--green);border-color:var(--green)}
+.roadmap-body{padding-bottom:26px;border-left:2px dashed var(--border);margin-left:0;padding-left:16px;margin-left:-2px}
+.roadmap-step:last-child .roadmap-body{border-left:none}
+.roadmap-body h4{font-size:15px;margin-bottom:4px}
+.roadmap-body p{font-size:13px;color:var(--muted);line-height:1.7}
+.search-box{width:100%;background:#0a0e14;border:1px solid var(--border);border-radius:10px;color:var(--fg);padding:12px 16px;font-size:14px;margin-bottom:18px}
+.search-box:focus{outline:none;border-color:var(--accent)}
